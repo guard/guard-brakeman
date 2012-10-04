@@ -5,12 +5,12 @@ require 'spec_helper'
 # Pending tests
 describe Guard::Brakeman do
   let(:default_options) { {:cli => '--stuff'} }
-  let(:tracker) { double().as_null_object }  
+  let(:tracker) { double().as_null_object }
   let(:report) { double().as_null_object }
 
   before(:each) do
     @guard = Guard::Brakeman.new
-    
+    @guard.stub(:decorate_warning)
     @guard.instance_variable_set(:@tracker, tracker)
     @guard.instance_variable_set(:@options, {:notifications => false, :app_path => 'tmp/aruba/default_app'})
   end
@@ -28,7 +28,7 @@ describe Guard::Brakeman do
       before(:each) do
         @guard.instance_variable_set(:@options, @guard.instance_variable_get(:@options).merge({:run_on_start => true}))
       end
-      
+
       it 'runs all checks' do
         scanner.stub(:process).and_return(tracker)
         @guard.should_receive(:run_all)
@@ -92,14 +92,14 @@ describe Guard::Brakeman do
       it 'writes the brakeman report to disk' do
         @guard.should_receive(:write_report)
         @guard.send :print_failed, report
-      end 
+      end
 
       it 'adds the report filename to the growl' do
         @guard.stub(:write_report)
         @guard.instance_variable_set(:@options, @guard.instance_variable_get(:@options).merge({:chatty => true}))
         ::Guard::Notifier.should_receive(:notify).with(/test\.csv/, anything)
         @guard.send :print_failed, report
-      end 
+      end
     end
 
     context 'with notifications disabled' do
@@ -112,8 +112,8 @@ describe Guard::Brakeman do
         @guard.send :print_failed, report
       end
     end
-  end   
-  
+  end
+
   describe '#print_changed' do
     before(:each) do
       report.stub(:all_warnings).and_return [double(:confidence => 3)]
@@ -124,7 +124,7 @@ describe Guard::Brakeman do
       before(:each) do
         @guard.instance_variable_set(:@options, @guard.instance_variable_get(:@options).merge(options))
       end
-      
+
       it 'does not alert on warnings below the threshold' do
         ::Guard::Notifier.should_not_receive :notify
         @guard.send :print_changed, report
@@ -139,9 +139,9 @@ describe Guard::Brakeman do
       it 'notifies the user' do
         ::Guard::Notifier.should_receive :notify
         @guard.send :print_changed, report
-      end  
+      end
     end
-    
+
     context 'with notifications disabled' do
       before(:each) do
         @guard.instance_variable_set(:@options, {:notifications => false})
@@ -161,14 +161,14 @@ describe Guard::Brakeman do
       it 'writes the brakeman report to disk' do
         File.should_receive(:open).with('test.csv', 'w')
         @guard.send :print_changed, report
-      end 
+      end
 
       it 'adds the report filename to the growl' do
         @guard.stub(:write_report)
         @guard.instance_variable_set(:@options, @guard.instance_variable_get(:@options).merge({:notifications => true}))
         ::Guard::Notifier.should_receive(:notify).with(/test\.csv/, anything)
         @guard.send :print_changed, report
-      end 
+      end
     end
   end
 
