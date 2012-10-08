@@ -1,4 +1,4 @@
-guard 'brakeman', :chatty => true, :notifications => true, :run_on_start => true, :min_confidence => 0 do
+guard 'brakeman', :chatty => false,:notifications => true, :run_on_start => true, :min_confidence => 0 do
   watch(%r{^app/.+\.(erb|haml|rhtml|rb)$})
   watch(%r{^config/.+\.rb$})
   watch(%r{^lib/.+\.rb$})

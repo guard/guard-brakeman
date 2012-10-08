@@ -1,4 +1,7 @@
-# 0.5.0 
+# 0.5.1
+- Cleanup the output and clean up some code
+
+# 0.5.0
 - Support for >= guard-1.1.0
 
 # 0.4.0
