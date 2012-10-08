@@ -27,7 +27,7 @@ $ guard init brakeman
 
 ## Use sublime Text 2?
 
-Check out [sublime_guard](https://github.com/cyphactor/sublime_guard)!  It gives you control Guard without leaving the editor.  This is even more powerful with Growl notifications.  Enter distraction-free mode and never leave! 
+Check out [sublime_guard](https://github.com/cyphactor/sublime_guard)!  It gives you control Guard without leaving the editor.  This is even more powerful with Growl notifications.  Enter distraction-free mode and never leave!
 
 ## Usage
 
@@ -85,7 +85,6 @@ Pull requests are very welcome! Please try to follow these simple rules if appli
 
 * Please create a topic branch for every separate change you make.
 * Make sure your patches are well tested.
-* Update the [Yard](http://yardoc.org/) documentation.
 * Update the README.
 * Update the CHANGELOG for noteworthy changes.
 * Please **do not change** the version number.
