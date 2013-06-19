@@ -164,9 +164,13 @@ module Guard
       end
     end
 
-    # stolen from ActiveSupport
     def pluralize(count, singular, plural = nil)
-      "#{count || 0} " + ((count == 1 || count =~ /^1(\.0+)?$/) ? singular : (plural || singular.pluralize))
+      "#{count || 0} " + ((count == 1 || count =~ /^1(\.0+)?$/) ? singular : (plural || pluralize_word(singular)))
+    end
+
+    # try ActiveSupport or naive pluralize
+    def pluralize_word(singular)
+      singular.respond_to?(:pluralize) ? singular.pluralize : singular + 's'
     end
 
     def info(message, color = :white)
