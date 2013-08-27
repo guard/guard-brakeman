@@ -56,8 +56,9 @@ module Guard
     #
     def run_all
       @tracker.run_checks
-      print_failed(@tracker.checks)
-      throw :task_has_failed if @tracker.checks.all_warnings.any?
+      ::Brakeman.filter_warnings @tracker, @scanner_opts
+      print_failed(@tracker)
+      throw :task_has_failed if @tracker.filtered_warnings.any?
     end
 
     # Gets called when watched paths and files have changes.
@@ -67,7 +68,6 @@ module Guard
     #
     def run_on_changes paths
       return run_all unless @tracker.checks
-
       info "\n\nrescanning #{paths}, running all checks"
       report = ::Brakeman::rescan(@tracker, paths)
       print_changed(report)
@@ -76,13 +76,10 @@ module Guard
 
     private
 
-    def print_failed report
+    def print_failed tracker
       info "\n------ brakeman warnings --------\n"
-
-      icon = report.all_warnings.count > 0 ? :failed : :success
-
-      all_warnings = report.all_warnings
-
+      all_warnings = tracker.filtered_warnings
+      icon = all_warnings.count > 0 ? :failed : :success
       message = "#{all_warnings.count} brakeman findings"
 
       if @options[:output_files]
