@@ -2,10 +2,6 @@
 
 Guard::Brakeman allows you to automatically run [Brakeman](http://brakemanscanner.org/) tests when files are modified.
 
-Use guard-brakeman >= 0.4.0 for brakeman >= 1.5.3
---------------
-And use < 0.4.0 for brakeman < 1.5.3
-
 ## Install
 
 The simplest way to install Guard is to use [Bundler](http://gembundler.com/).
@@ -53,6 +49,8 @@ Please read the [Guard documentation](http://github.com/guard/guard#readme) for 
 ### List of available options
 
 ```ruby
+:quiet          => false    # set the "quiet" option in brakeman (only results will be printed)
+:ignore_file    => 'config/brakeman.ignore'
 :output_files   => %w(donkey.html) # write the results to the specified files
 :notifications  => false    # display Growl notifications, defaults to true
 :run_on_start   => true     # run all checks on startup, defaults to false

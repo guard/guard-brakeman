@@ -1,3 +1,7 @@
+# 0.8.0
+
+Adds support for Brakeman 2.1.0's ability to ignore specified warnings http://brakemanscanner.org/blog/2013/07/17/brakeman-2-dot-1-0-released/
+
 # 0.7.1
 
 "quiet" option only sets brakeman -q flag, it doesn't suppress messages from guard-brakeman anymore.

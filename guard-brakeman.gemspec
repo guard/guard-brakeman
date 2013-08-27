@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name        = 'guard-brakeman'
-  s.version     = '0.7.1'
+  s.version     = '0.8.0'
   s.platform    = Gem::Platform::RUBY
   s.license     = 'MIT'
   s.authors     = ['Neil Matatall', 'Justin Collins']
@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.rubyforge_project         = 'guard-brakeman'
 
   s.add_dependency 'guard',   '>= 1.1.0'
-  s.add_dependency 'brakeman', '>= 1.8.2'
+  s.add_dependency 'brakeman', '>= 2.1.0'
 
   s.files        = Dir.glob('{lib}/**/*') + %w[LICENSE README.md]
   s.require_path = 'lib'
