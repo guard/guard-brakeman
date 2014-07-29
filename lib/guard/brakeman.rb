@@ -21,6 +21,13 @@ module Guard
         end
       end
 
+      if options[:url_safe_methods]
+        options[:url_safe_methods]=
+          options[:url_safe_methods].map do |val|
+             val.to_sym
+        end
+      end
+
       # chatty implies notifications
       options[:notifications] = true if options[:chatty]
 
