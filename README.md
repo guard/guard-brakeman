@@ -56,6 +56,7 @@ Please read the [Guard documentation](http://github.com/guard/guard#readme) for 
 :run_on_start   => true     # run all checks on startup, defaults to false
 :min_confidence => 3        # only alert on warnings above a threshold, defaults to 1
 :chatty         => true     # notify on ALL changes.  Defaults to false, only new or fixed warnings trigger a Growl
+:url_safe_methods => %w(method1 method2) # list methods which are safe for use in link_to URLs
 ```
 
 ## Brakeman configuration
