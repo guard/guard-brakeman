@@ -38,7 +38,8 @@ module Guard
         :run_on_start => false,
         :chatty => false,
         :min_confidence => 2,
-        :quiet => false
+        :quiet => false,
+        :support_rescanning => true, # Will be needed for Brakeman 7.0
       }.merge!(options)
       @scanner_opts = ::Brakeman::set_options({:app_path => '.'}.merge(@options))
     end
