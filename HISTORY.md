@@ -1,3 +1,7 @@
+# 1.0.0
+
+Add compatibility with Brakeman 7.0 @presidentbeef
+
 # 0.8.6
 
 Fix guard-compat issues @presidentbeef
